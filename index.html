@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3-net</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		ul {
+			list-style: none;
+		}
+		.container {
+			width: 467px;
+			height: 467px;
+			border: 1px solid black;
+			position: relative;
+			background-color: #171b20;
+			box-sizing: border-box;
+		}
+		.origin {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 12.5%;
+			height: 12.5%;
+			border-radius: 50%;
+			background-color: #1d232a;
+			border: 4px solid #38664d;
+			z-index: 999;
+		}
+		.origin-line {
+		}
+		.origin-line li {
+			position: absolute;
+			left: 50%;
+			bottom: 50%;
+			width: 2px;
+			height: 32%;
+			background: #1a2a28;
+			transform-origin: center bottom;
+			z-index: 9;
+			transition: all 1s ease;
+		}
+		.origin-line li:nth-child(1) {
+			transform: rotate(0deg);
+		}
+		.origin-line li:nth-child(2) {
+			transform: rotate(60deg);
+		}
+		.origin-line li:nth-child(3) {
+			transform: rotate(120deg);
+		}
+		.origin-line li:nth-child(4) {
+			transform: rotate(180deg);
+		}
+		.origin-line li:nth-child(5) {
+			transform: rotate(240deg);
+		}
+		.origin-line li:nth-child(6) {
+			transform: rotate(300deg);
+		}
+		.child {
+		}
+		.child li {
+			position: absolute;
+			left: 50%;
+			top: 31.5%;
+			width: 5%;
+			height: 5%;
+			border-radius: 50%;
+			background: #59ce9e;
+			transform-origin: center 417%;
+			z-index: 999;
+		}
+		.child li:nth-child(1) {
+			transform: translate(-50%, -50%) rotate(0deg);
+		}
+		.child li:nth-child(2) {
+			transform: translate(-50%, -50%) rotate(60deg);
+		}
+		.child li:nth-child(3) {
+			transform: translate(-50%, -50%) rotate(120deg);
+		}
+		.child li:nth-child(4) {
+			transform: translate(-50%, -50%) rotate(180deg);
+		}
+		.child li:nth-child(5) {
+			transform: translate(-50%, -50%) rotate(240deg);
+		}
+		.child li:nth-child(6) {
+			transform: translate(-50%, -50%) rotate(300deg);
+		}
+		.child-circle {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 37%;
+			height: 37%;
+			border-radius: 50%;
+			border: 2px solid #1a2a28;
+			z-index: 1;
+		}
+
+		.grandson li {
+			position: absolute;
+			left: 50%;
+			top: 16%;
+			width: 5%;
+			height: 5%;
+			border-radius: 50%;
+			background: #56dad5;
+			transform-origin: center 730%;
+			box-sizing: border-box;
+			z-index: 999;
+			transition: all 1s ease;
+		}
+		.grandson li:nth-child(1) {
+			transform: translate(-50%, -50%) rotate(0deg);
+		}
+		.grandson li:nth-child(2) {
+			transform: translate(-50%, -50%) rotate(60deg);
+		}
+		.grandson li:nth-child(3) {
+			transform: translate(-50%, -50%) rotate(120deg);
+		}
+		.grandson li:nth-child(4) {
+			transform: translate(-50%, -50%) rotate(180deg);
+		}
+		.grandson li:nth-child(5) {
+			transform: translate(-50%, -50%) rotate(2400deg);
+		}
+		.grandson li:nth-child(6) {
+			transform: translate(-50%, -50%) rotate(300deg);
+		}
+
+		.grandson-circle {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 67%;
+			height: 67%;
+			border-radius: 50%;
+			border: 2px solid #1a2a28;
+			z-index: 1;
+			transition: all 1s ease;
+		}
+	</style>
+</head>
+<body>
+<!-- 球的层次在999   线的层级9   字的层级99 -->
+	<div class="container" id="container">
+		<div class="origin"></div>
+		<ul class="origin-line">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<ul class="child">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="child-circle"></div>
+
+		<ul class="grandson">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="grandson-circle"></div>
+	</div>
+
+	<script src="http://s.thsi.cn/js/jquery-1.8.3.min.js"></script>
+	<script>
+		//监听div大小变化
+		(function($, h, c) {
+			var a = $([]),
+			e = $.resize = $.extend($.resize, {}),
+			i,
+			k = "setTimeout",
+			j = "resize",
+			d = j + "-special-event",
+			b = "delay",
+			f = "throttleWindow";
+			e[b] = 250;
+			e[f] = true;
+			$.event.special[j] = {
+				setup: function() {
+					if (!e[f] && this[k]) {
+						return false;
+					}
+					var l = $(this);
+					a = a.add(l);
+					$.data(this, d, {
+						w: l.width(),
+						h: l.height()
+					});
+					if (a.length === 1) {
+						g();
+					}
+				},
+				teardown: function() {
+					if (!e[f] && this[k]) {
+						return false;
+					}
+					var l = $(this);
+					a = a.not(l);
+					l.removeData(d);
+					if (!a.length) {
+						clearTimeout(i);
+					}
+				},
+				add: function(l) {
+					if (!e[f] && this[k]) {
+						return false;
+					}
+					var n;
+					function m(s, o, p) {
+						var q = $(this),
+						r = $.data(this, d);
+						r.w = o !== c ? o: q.width();
+						r.h = p !== c ? p: q.height();
+						n.apply(this, arguments);
+					}
+					if ($.isFunction(l)) {
+						n = l;
+						return m;
+					} else {
+						n = l.handler;
+						l.handler = m;
+					}
+				}
+			};
+			function g() {
+				i = h[k](function() {
+					a.each(function() {
+						var n = $(this),
+						m = n.width(),
+						l = n.height(),
+						o = $.data(this, d);
+						if (m !== o.w || l !== o.h) {
+							n.trigger(j, [o.w = m, o.h = l]);
+						}
+					});
+					g();
+				},
+				e[b]);
+			}
+		})(jQuery, this);
+
+
+
+		(function () {
+			var size = true;
+			// $('#container').on('click', function () {
+			// 	if (size) {
+			// 		$(this).css({
+			// 			width: '1200px',
+			// 			height: '1200px'
+			// 		});
+			// 		size = false;
+			// 	} else {
+			// 		$(this).css({
+			// 			width: '600px',
+			// 			height: '600px'
+			// 		});
+			// 		size = true;
+			// 	}
+			// });
+
+			$('.child li').on('click', function () {
+				var index = $(this).index();
+				console.log(index);
+				console.log($('.grandson li').eq(index).css('opacity'));
+				if ($('.grandson li').eq(index).css('opacity') === '1') {
+					$('.grandson li').eq(index).css('opacity', 0);
+					$('.origin-line li').eq(index).height('17%');
+				} else {
+					$('.grandson li').eq(index).css('opacity', 1);
+					$('.origin-line li').eq(index).height('32%');
+				}
+
+				$('.grandson-circle').css('opacity', 0);
+			});
+
+			$('#container').resize(function () {
+				console.log(1);
+			});
+
+		})();
+	</script>
+</body>
+</html>
