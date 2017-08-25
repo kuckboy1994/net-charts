@@ -6,159 +6,146 @@
 	<style type="text/css">
 		.net-chart {
 			width: 80%;
-			height: 600px;
+			height: 1000px;
 		}
 	</style>
 </head>
 <body>
 	<div class="net-chart" id="view_net_chart">
 	</div>
+	<div class="net-chart" id="view_net_chart_1">
+	</div>
 
 	<script src="http://s.thsi.cn/js/jquery-1.8.3.min.js"></script>
 	<script src="netChart.js"></script>
 	<script>
 		$('#view_net_chart').netChart({
-			title: '啤酒行业利空',
+			title: {
+				text: '啤酒行业利空',
+				color: '#3c6c50',
+				fontSize: '16px',
+				lineHeight: '16px',
+				fontWeight: 'bold'
+			},
+			expand: false,
 			data: [
 				{
 					title: '啤酒需求下降1',
 					child: {
-						title: '小米胚芽油需求上升',
+						title: '(小麦胚芽油的上游需求是小麦)',
 						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
+							'小米胚芽油需求上升'
 						]
 					} 
-				},{
+				},
+				{
+					title: '啤酒需求下降1'
+				},
+				{
 					title: '啤酒需求下降1',
 					child: {
-						title: '小米胚芽油需求上升',
+						title: '(小麦胚芽油的上游需求是小麦)',
 						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
-						]
-					} 
-				},{
-					title: '啤酒需求下降1',
-					child: {
-						title: '小米胚芽油需求上升',
-						subtitle: [
-							'(小麦胚芽油的上游需求是小麦)',
-							'(小麦胚芽油的上游需求是小麦)'
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
 						]
 					} 
 				}
 			]
 		});
-
+		$('#view_net_chart_1').netChart({
+			title: {
+				text: '啤酒行业利空',
+				color: '#3c6c50',
+				fontSize: '16px',
+				lineHeight: '16px',
+				fontWeight: 'bold'
+			},
+			data: [
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升'
+						]
+					} 
+				},
+				{
+					title: '啤酒需求下降1'
+				},
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
+						]
+					} 
+				},
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
+						]
+					} 
+				},
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
+						]
+					} 
+				},
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
+						]
+					} 
+				},
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
+						]
+					} 
+				},
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
+						]
+					} 
+				},
+				{
+					title: '啤酒需求下降1',
+					child: {
+						title: '(小麦胚芽油的上游需求是小麦)',
+						subtitle: [
+							'小米胚芽油需求上升',
+							'小米胚芽油需求上升'
+						]
+					} 
+				}
+			]
+		});
 	</script>
 
 </body>

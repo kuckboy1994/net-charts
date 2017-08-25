@@ -12,8 +12,8 @@
 			list-style: none;
 		}
 		.container {
-			width: 467px;
-			height: 467px;
+			width: 800px;
+			height: 800px;
 			border: 1px solid black;
 			position: relative;
 			background-color: #171b20;
@@ -149,6 +149,22 @@
 			z-index: 1;
 			transition: all 1s ease;
 		}
+
+		.child li span {
+			color: #59ce9e;
+			font-size: 12px;
+			display: block;
+			width: 100px;
+			height: 12px;
+			line-height: 12px;
+			font-family: '微软雅黑';
+
+			position: absolute;
+			top: -20px;
+			left: 50%;
+			text-align: center;
+			transform: translate(-50%, -50%) rotate(180deg);
+		}
 	</style>
 </head>
 <body>
@@ -164,12 +180,12 @@
 			<li></li>
 		</ul>
 		<ul class="child">
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li><span>啤酒需求下降</span></li>
+			<li><span>啤酒需求下降</span></li>
+			<li><span>啤酒需求下降</span></li>
+			<li><span>啤酒需求下降</span></li>
+			<li><span>啤酒需求下降</span></li>
+			<li><span>啤酒需求下降</span></li>
 		</ul>
 		<div class="child-circle"></div>
 
@@ -182,6 +198,10 @@
 			<li></li>
 		</ul>
 		<div class="grandson-circle"></div>
+	</div>
+
+	<div class="add-option">
+		
 	</div>
 
 	<script src="http://s.thsi.cn/js/jquery-1.8.3.min.js"></script>
@@ -294,7 +314,7 @@
 					$('.origin-line li').eq(index).height('32%');
 				}
 
-				$('.grandson-circle').css('opacity', 0);
+				// $('.grandson-circle').css('opacity', 0);
 			});
 
 			$('#container').resize(function () {

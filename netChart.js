@@ -6,14 +6,24 @@
 (function ($) {
 	//默认参数
 	var defaluts = {
-		title: '网状图',
+		common: {
+			fontFamily: '微软雅黑'
+		},
+		title: {
+			text: '网状图网状图',
+			color: '#3c6c50',
+			fontSize: '20px',
+			lineHeight: '20px',
+			fontWeight: 'bold'
+		},
+		expand: true,
 		data: [],
 		containerId: 'view_net_chart_container',
 		backgroundColor: '#171b20',
 		originBoll: {
 			color: '#000',
 			fontSize: '14px',
-			border: '4px solid #38664d',
+			border: '4px solid #3c6c50',
 			backgroundColor: '#1d232a',
 			zIndex: 999
 		},
@@ -45,37 +55,23 @@
 	$.fn.extend({
 		netChart: function (options) {
 			var self = this;
+			var myDate = new Date();
 			var options = $.extend({}, defaluts, options);
-			
 			this.options = options;
-			
-			console.log(this.options);
+			this.options.containerId = this.options.containerId + myDate.getTime();
+
 			self._addContainer();	// 添加容器
 			self._setSize();		// 设置容器大小
 			self._draw();			// 绘图
 			self._addEvent();		// 添加监听事件
 			self._resize();			// resize 事件
-			self._setText();
-		},
-		_setText: function () {
-			this._setOriginText();
-			this._setChildText();
-			this._setGrandsonText();
-		},
-		_setOriginText: function () {
-			$(this).find('.origin').text(this.options.title);
-		},
-		_setChildText: function () {
-
-		},
-		_setGrandsonText: function () {
-
 		},
 		_addContainer: function () {
 			$(this).css({
 				position: 'relative',
 				backgroundColor: this.options.backgroundColor,
-				overflow: 'hidden'
+				overflow: 'hidden',
+				fontFamily: this.options.common.fontFamily
 			});
 			$(this).append('<div id="'+this.options.containerId+'"></div>');
 		},
@@ -113,32 +109,100 @@
 		},
 		_draw: function () {
 			this._drawOrigin();
-			this._drawBollAndOriginLine();
+			this._drawBollAndOriginLineAndText();
 			this._drawChildCircle();
 			this._drawGrandsonLine();
 		},
 		_drawOrigin: function () {
-			$('#'+this.options.containerId).append('<div class="origin" style="position: absolute;\
-			top: 50%;\
-			left: 50%;\
-			transform: translate(-50%, -50%);\
-			width: 12.5%;\
-			height: 12.5%;\
-			border-radius: 50%;\
-			background-color: '+this.options.originBoll.backgroundColor+';\
-			border: '+this.options.originBoll.border+';\
-			z-index: '+this.options.originBoll.zIndex+';"></div>');
+			$('#'+this.options.containerId).append('<div class="origin" style="\
+				position: absolute;\
+				top: 50%;\
+				left: 50%;\
+				transform: translate(-50%, -50%);\
+				width: 13%;\
+				height: 13%;\
+				border-radius: 50%;\
+				background-color: '+this.options.originBoll.backgroundColor+';\
+				border: '+this.options.originBoll.border+';\
+				z-index: '+this.options.originBoll.zIndex+';\
+				color: '+this.options.title.color+';\
+				font-size: '+this.options.title.fontSize+';\
+				text-align: center;\
+				padding: 10px;\
+				box-sizing: border-box;\
+				display: flex;\
+				align-items: center;\
+				">\
+					<span style="\
+						text-align: center;\
+						display: inline-block;\
+						width: 100%;\
+					">'+this.options.title.text+'</span>\
+				</div>');
 		},
-		_drawBollAndOriginLine: function () {
+		_getAddOption: function (addOption, deg) {
+			if (addOption) {
+				return '<div class="option">\
+							<span style="\
+								display: inline-block;\
+								width: 40%;\
+								min-width: 20px;\
+								height: 4%;\
+								background: #a3e8cc;\
+								position: absolute;\
+								top: 50%;\
+								left: 50%;\
+								transform: translate(-50%, -50%) rotate(-'+deg+'deg);\
+								"></span>\
+							<span style="\
+								display: inline-block;\
+								width: 40%;\
+								min-width: 20px;\
+								height: 4%;\
+								background: #a3e8cc;\
+								position: absolute;\
+								top: 50%;\
+								left: 50%;\
+								transform: translate(-50%, -50%) rotate('+(90-deg)+'deg);\
+								"></span>\
+						</div>';
+			} else {
+				return '<div class="option">\
+							<span style="\
+								display: inline-block;\
+								width: 40%;\
+								min-width: 20px;\
+								height: 4%;\
+								background: #a3e8cc;\
+								position: absolute;\
+								top: 50%;\
+								left: 50%;\
+								transform: translate(-50%, -50%) rotate(-'+deg+'deg);\
+								"></span>\
+						</div>';
+			}
+		},
+		_drawBollAndOriginLineAndText: function () {
 			var self = this;
 			var originLineHtml = '<ul class="origin-line">';
 			var childHtml = '<ul class="child">';
 			var grandsonHtml = '<ul class="grandson">';
 			var deg = 360 / this.options.data.length;
-			var lineHight, grandsonOpacity, grandsonClass;
+			var lineHight, grandsonOpacity, grandsonClass,grandsonTextHtml;
 			$.each(this.options.data, function (key, value) {
+				var rotateDeg = deg * key;
+				var textRotateDeg = 0;
+				if (rotateDeg <= 90 || rotateDeg > 270) {
+					textRotateDeg = 0;
+				} else {
+					textRotateDeg = 180;
+				}
 				if (value.child) {
-					lineHight = 32;
+					if (self.options.expand) {
+						lineHight = 32;
+					} else {
+						lineHight = 17;
+					}
 				} else {
 					lineHight = 17;
 				}
@@ -155,17 +219,51 @@
 							transform-origin: center bottom;\
 							z-index: '+self.options.originLine.zIndex+';\
 							transition: '+self.options.originLine.transition+';\
-							transform: rotate('+key*deg+'deg);"></li>';
+							transform: rotate('+rotateDeg+'deg);"></li>';
 
 				if (value.child) {
-					grandsonOpacity = 1;
+					if (self.options.expand) {
+						grandsonOpacity = 1;
+					} else {
+						grandsonOpacity = 0;
+					}
+					
 					grandsonClass = '';
+					grandsonTextHtml = '<span style="\
+									color: '+self.options.grandsonBoll.backgroundColor+';\
+									font-size: 12px;\
+									display: block;\
+									width: 200px;\
+									height: 12px;\
+									line-height: 12px;\
+									position: absolute;\
+									top: -15px;\
+									left: 50%;\
+									text-align: center;\
+									transform: translate(-50%, -50%) rotate('+textRotateDeg+'deg);\
+								">'+value.child.title+'</span>';
+					$.each(value.child.subtitle, function (k, v) {
+						grandsonTextHtml += '<span style="\
+									color: '+self.options.grandsonBoll.backgroundColor+';\
+									font-size: 12px;\
+									display: block;\
+									width: 200px;\
+									height: 12px;\
+									line-height: 12px;\
+									position: absolute;\
+									top: -'+(35+k*20)+'px;\
+									left: 50%;\
+									text-align: center;\
+									transform: translate(-50%, -50%) rotate('+textRotateDeg+'deg);\
+								">'+value.title+'</span>';
+					});
 				} else {
 					grandsonOpacity = 0;
 					grandsonClass = 'neverShow';
+					grandsonTextHtml = '';
 				}
 
-				childHtml += '<li style="\
+				childHtml += '<li data-deg="'+rotateDeg+'" style="\
 							cursor: '+(grandsonClass === 'neverShow' ? 'default' : 'pointer')+';\
 							list-style:none;\
 							padding:0;\
@@ -179,9 +277,24 @@
 							background: '+self.options.childBoll.backgroundColor+';\
 							transform-origin: center 417%;\
 							z-index: '+self.options.childBoll.zIndex+';\
-							transform: translate(-50%, -50%) rotate('+key*deg+'deg);"></li>';
+							transform: translate(-50%, -50%) rotate('+rotateDeg+'deg);">\
+								'+(grandsonClass === 'neverShow' ? '' : self._getAddOption(!self.options.expand, rotateDeg))+'\
+								<span style="\
+									color: '+self.options.childBoll.backgroundColor+';\
+									font-size: 12px;\
+									display: block;\
+									width: 200px;\
+									height: 12px;\
+									line-height: 12px;\
+									position: absolute;\
+									top: -15px;\
+									left: 50%;\
+									text-align: center;\
+									transform: translate(-50%, -50%) rotate('+textRotateDeg+'deg);\
+								">'+value.title+'</span>\
+							</li>';
 				
-				grandsonHtml += '<li class="'+grandsonClass+'" \
+				grandsonHtml += '<li class="'+grandsonClass+' '+(grandsonClass === 'neverShow' ? 'origin-hide': self.options.expand ? '' : 'origin-hide')+'" \
 							style="\
 							list-style:none;\
 							padding:0;\
@@ -198,7 +311,9 @@
 							z-index: 999;\
 							transition: all 1s ease;\
 							opacity: '+grandsonOpacity+';\
-							transform: translate(-50%, -50%) rotate('+key*deg+'deg);"></li>';
+							transform: translate(-50%, -50%) rotate('+rotateDeg+'deg);">\
+								'+grandsonTextHtml+'\
+							</li>';
 			});
 			
 			originLineHtml += '</ul>';
@@ -227,12 +342,13 @@
 							left: 50%;\
 							top: 50%;\
 							transform: translate(-50%, -50%);\
-							width: 67%;\
-							height: 67%;\
+							width: 68%;\
+							height: 68%;\
 							border-radius: 50%;\
 							border: '+this.options.grandsonCircle.border+';\
 							z-index: '+this.options.grandsonCircle.zIndex+';\
 							transition: '+this.options.grandsonCircle.transition+';\
+							opacity: '+(this.options.expand ? 1 : 0)+';\
 							"></div>';
 			$('#'+this.options.containerId).append(html);
 		},
@@ -240,21 +356,22 @@
 			var self = this;
 			$(this).on('click', '.child li', function () {
 				var index = $(this).index();
-				console.log(index);
+				$(this).find('.option').remove();
+
 				var grandsonLiDom = $(self).find('.grandson li');
 				var originLiDom = $(self).find('.origin-line li');
-				//console.log(grandsonLiDom);
 				if (grandsonLiDom.eq(index).css('opacity') === '1') {
-					// grandsonLiDom.eq(index).css('width', '200px');
 					grandsonLiDom.eq(index).css('opacity', 0).addClass('origin-hide');
 					originLiDom.eq(index).height('17%');
+					$(this).append(self._getAddOption(true, parseFloat($(this).attr('data-deg'))));
 				} else {
 					if (!grandsonLiDom.eq(index).hasClass('neverShow')) {
 						grandsonLiDom.eq(index).css('opacity', 1).removeClass('origin-hide');
 						originLiDom.eq(index).height('32%');
+						$(this).append(self._getAddOption(false, parseFloat($(this).attr('data-deg'))));
 					}
 				}
-				if ($('.origin-hide').length === self.options.data.length) {
+				if ($(self).find('.origin-hide').length === self.options.data.length) {
 					$(self).find('.grandson-circle').css('opacity', 0);
 				} else {
 					$(self).find('.grandson-circle').css('opacity', 1);
