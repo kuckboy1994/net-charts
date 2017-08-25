@@ -83,22 +83,21 @@
 				height: aData.height,
 				top: aData.top,
 				left: aData.left,
-				overflow: 'hidden',
-				
+				overflow: 'hidden'
 			});
 		},
 		_getAdjustmentData: function (a, b) {
 			var width = $(this).width();
 			var height = $(this).height();
-			var length = width > height ? width : height;
+			var length = width < height ? width : height;
 			this.width = width;
 			this.height = height;
 			this.maxlength = length;
 			var top = '0px', left = '0px';
 			if (width > height) {
-				top = -1 * (width - height) / 2 + 'px';
+				left = (width - height) / 2 + 'px';
 			} else {
-				left = -1 * (height - width) / 2 + 'px';
+				top = (height - width) / 2 + 'px';
 			}
 			return {
 				width: length,
