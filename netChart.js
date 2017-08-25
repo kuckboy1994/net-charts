@@ -254,7 +254,7 @@
 									left: 50%;\
 									text-align: center;\
 									transform: translate(-50%, -50%) rotate('+textRotateDeg+'deg);\
-								">'+value.title+'</span>';
+								">'+v+'</span>';
 					});
 				} else {
 					grandsonOpacity = 0;
