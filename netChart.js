@@ -73,7 +73,7 @@
 				overflow: 'hidden',
 				fontFamily: this.options.common.fontFamily
 			});
-			$(this).append('<div id="'+this.options.containerId+'"></div>');
+			$(this).html('<div id="'+this.options.containerId+'"></div>');
 		},
 		_setSize: function () {
 			var aData = this._getAdjustmentData();
@@ -147,7 +147,7 @@
 								width: 40%;\
 								min-width: 20px;\
 								height: 4%;\
-								background: #a3e8cc;\
+								background-color: #a3e8cc;\
 								position: absolute;\
 								top: 50%;\
 								left: 50%;\
@@ -158,7 +158,7 @@
 								width: 40%;\
 								min-width: 20px;\
 								height: 4%;\
-								background: #a3e8cc;\
+								background-color: #a3e8cc;\
 								position: absolute;\
 								top: 50%;\
 								left: 50%;\
@@ -172,7 +172,7 @@
 								width: 40%;\
 								min-width: 20px;\
 								height: 4%;\
-								background: #a3e8cc;\
+								background-color: #a3e8cc;\
 								position: absolute;\
 								top: 50%;\
 								left: 50%;\
@@ -214,7 +214,7 @@
 							bottom: 50%;\
 							width: '+self.options.originLine.width+';\
 							height: '+lineHight+'%;\
-							background: '+self.options.originLine.backgroundColor+';\
+							background-color: '+self.options.originLine.backgroundColor+';\
 							transform-origin: center bottom;\
 							z-index: '+self.options.originLine.zIndex+';\
 							transition: '+self.options.originLine.transition+';\
@@ -273,7 +273,7 @@
 							width: 5%;\
 							height: 5%;\
 							border-radius: 50%;\
-							background: '+self.options.childBoll.backgroundColor+';\
+							background-color: '+self.options.childBoll.backgroundColor+';\
 							transform-origin: center 417%;\
 							z-index: '+self.options.childBoll.zIndex+';\
 							transform: translate(-50%, -50%) rotate('+rotateDeg+'deg);">\
@@ -304,10 +304,10 @@
 							width: 5%;\
 							height: 5%;\
 							border-radius: 50%;\
-							background: #56dad5;\
+							background-color: '+self.options.grandsonBoll.backgroundColor+';\
 							transform-origin: center 730%;\
 							box-sizing: border-box;\
-							z-index: 999;\
+							z-index: '+self.options.grandsonBoll.zIndex+';\
 							transition: all 1s ease;\
 							opacity: '+grandsonOpacity+';\
 							transform: translate(-50%, -50%) rotate('+rotateDeg+'deg);">\
@@ -353,7 +353,7 @@
 		},
 		_addEvent: function () {
 			var self = this;
-			$(this).on('click', '.child li', function () {
+			$('#'+this.options.containerId).on('click', '.child li', function () {
 				var index = $(this).index();
 				$(this).find('.option').remove();
 
