@@ -77,7 +77,7 @@
 		},
 		_setSize: function () {
 			var aData = this._getAdjustmentData();
-			$('#'+this.options.containerId).css({
+			$(this).find('#'+this.options.containerId).css({
 				position: 'absolute',
 				width: aData.width,
 				height: aData.height,
@@ -113,7 +113,7 @@
 			this._drawGrandsonLine();
 		},
 		_drawOrigin: function () {
-			$('#'+this.options.containerId).append('<div class="origin" style="\
+			$(this).find('#'+this.options.containerId).append('<div class="origin" style="\
 				position: absolute;\
 				top: 50%;\
 				left: 50%;\
@@ -319,7 +319,7 @@
 			childHtml += '</ul>';
 			grandsonHtml += '</ul>';
 
-			$('#'+this.options.containerId).append(originLineHtml+childHtml+grandsonHtml);
+			$(this).find('#'+this.options.containerId).append(originLineHtml+childHtml+grandsonHtml);
 		},
 		_drawChildCircle: function () {
 			var html = '<div class="child-circle" style="\
@@ -333,7 +333,7 @@
 							border: '+this.options.childCircle.border+';\
 							z-index: '+this.options.childCircle.zIndex+';\
 							"></div>';
-			$('#'+this.options.containerId).append(html);
+			$(this).find('#'+this.options.containerId).append(html);
 		},
 		_drawGrandsonLine: function () {
 			var html = '<div class="grandson-circle" style="\
@@ -349,11 +349,11 @@
 							transition: '+this.options.grandsonCircle.transition+';\
 							opacity: '+(this.options.expand ? 1 : 0)+';\
 							"></div>';
-			$('#'+this.options.containerId).append(html);
+			$(this).find('#'+this.options.containerId).append(html);
 		},
 		_addEvent: function () {
 			var self = this;
-			$('#'+this.options.containerId).on('click', '.child li', function () {
+			$(this).find('#'+this.options.containerId).on('click', '.child li', function () {
 				var index = $(this).index();
 				$(this).find('.option').remove();
 
