@@ -1,6 +1,5 @@
 /* @charset "UTF-8" */
 /*
- * @author KuckBoy<shanchao@myhexin.com>
  * @create 2017-08-23
  */
 (function ($) {
